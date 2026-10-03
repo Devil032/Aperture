@@ -1,0 +1,1058 @@
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folio Press — The Professional PDF Playbook</title>
+<meta name="description" content="A 142-page professional playbook on designing PDF guides with editorial-grade layout, typography and image treatment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          paper: '#F7F6F3',
+          ink: '#080A10',
+          surface: '#11141C',
+          line: '#232A39',
+          brand: {
+            50: '#F0F1FF', 100: '#E2E4FF', 200: '#C6CAFF', 300: '#A4A7FF',
+            400: '#7F7DFF', 500: '#5B4DF6', 600: '#4A3CE0', 700: '#3B2FB4',
+            800: '#312A8F', 900: '#2A2570'
+          },
+          coral: '#FF7A59',
+          sand: '#E8DFD0'
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          display: ['"Instrument Serif"', 'Georgia', 'serif']
+        },
+        boxShadow: {
+          soft: '0 2px 4px rgba(10,12,18,.04), 0 12px 32px -12px rgba(10,12,18,.14)',
+          lift: '0 24px 60px -20px rgba(10,12,18,.35)',
+          glow: '0 20px 60px -18px rgba(91,77,246,.55)'
+        }
+      }
+    }
+  }
+</script>
+<style>
+  html { -webkit-text-size-adjust: 100%; }
+  body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+  .font-display { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; }
+
+  /* -------- Ambient background pattern -------- */
+  .grid-bg {
+    background-image: radial-gradient(circle at 1px 1px, rgba(10,12,18,.085) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+  .dark .grid-bg {
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.075) 1px, transparent 0);
+  }
+
+  /* -------- Reveal on scroll -------- */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* -------- Spread animation -------- */
+  @keyframes spreadIn {
+    from { opacity: 0; transform: translateY(14px) scale(.985); }
+    to   { opacity: 1; transform: none; }
+  }
+  .spread-in { animation: spreadIn .55s cubic-bezier(.16,1,.3,1) both; }
+
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .floaty { animation: floaty 7s ease-in-out infinite; }
+  .floaty-slow { animation: floaty 9.5s ease-in-out infinite; }
+
+  /* -------- Book 3D -------- */
+  .book-stage { perspective: 1400px; }
+  .book {
+    transform-style: preserve-3d;
+    transform: rotateY(-16deg) rotateX(6deg);
+    transition: transform .9s cubic-bezier(.16,1,.3,1);
+  }
+
+  /* -------- Gradient text -------- */
+  .grad-text {
+    background: linear-gradient(100deg, #5B4DF6 0%, #7F7DFF 45%, #FF7A59 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+
+  /* -------- Buttons -------- */
+  .btn-primary {
+    background-image: linear-gradient(120deg, #5B4DF6, #7F7DFF 60%, #8E7CFF);
+    box-shadow: 0 14px 34px -14px rgba(91,77,246,.75);
+    transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s ease, filter .25s ease;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 22px 46px -16px rgba(91,77,246,.85); filter: saturate(1.1); }
+
+  .btn-ghost { transition: transform .25s cubic-bezier(.16,1,.3,1), background-color .2s ease, border-color .2s ease; }
+  .btn-ghost:hover { transform: translateY(-2px); }
+
+  /* -------- Card hover -------- */
+  .card-hover { transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease, border-color .3s ease; }
+  .card-hover:hover { transform: translateY(-6px); }
+
+  /* -------- Accordion -------- */
+  .faq-body { max-height: 0; overflow: hidden; transition: max-height .45s cubic-bezier(.16,1,.3,1), opacity .35s ease; opacity: 0; }
+  .faq-item.open .faq-body { opacity: 1; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-icon { transition: transform .35s cubic-bezier(.16,1,.3,1); }
+
+  /* -------- Scrollbar -------- */
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(120,125,145,.4); border-radius: 99px; border: 3px solid transparent; background-clip: content-box; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(120,125,145,.65); background-clip: content-box; }
+
+  .nav-scrolled { backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%); }
+  section { scroll-margin-top: 84px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body class="bg-paper dark:bg-ink text-ink dark:text-slate-100 antialiased selection:bg-brand-500/25">
+
+<!-- Scroll progress -->
+<div class="fixed top-0 left-0 right-0 h-[3px] z-[60] bg-transparent">
+  <div id="progressBar" class="h-full w-0 bg-gradient-to-r from-brand-500 via-brand-400 to-coral"></div>
+</div>
+
+<!-- ================= NAV ================= -->
+<header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b border-transparent">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="h-[68px] flex items-center justify-between gap-6">
+      <a href="#" class="flex items-center gap-2.5 group">
+        <span class="relative grid place-items-center w-9 h-9 rounded-[10px] bg-gradient-to-br from-brand-500 to-brand-700 shadow-glow">
+          <svg viewBox="0 0 24 24" class="w-[18px] h-[18px] text-white" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/>
+          </svg>
+        </span>
+        <span class="leading-none">
+          <span class="block font-semibold tracking-tight text-[15px]">Folio Press</span>
+          <span class="block text-[10.5px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 mt-0.5">Design Studio</span>
+        </span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-1 text-[14px] font-medium text-slate-600 dark:text-slate-300">
+        <a href="#features" class="px-3.5 py-2 rounded-lg hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition">What's inside</a>
+        <a href="#preview" class="px-3.5 py-2 rounded-lg hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition">Preview</a>
+        <a href="#chapters" class="px-3.5 py-2 rounded-lg hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition">Chapters</a>
+        <a href="#pricing" class="px-3.5 py-2 rounded-lg hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition">Pricing</a>
+        <a href="#faq" class="px-3.5 py-2 rounded-lg hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition">FAQ</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button id="themeToggle" aria-label="Toggle dark mode" class="grid place-items-center w-10 h-10 rounded-xl border border-black/[0.08] dark:border-line bg-white/70 dark:bg-white/[0.04] hover:bg-white dark:hover:bg-white/[0.08] transition">
+          <svg class="w-[18px] h-[18px] hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="w-[18px] h-[18px] dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <a href="#pricing" class="hidden sm:inline-flex btn-primary text-white text-[13.5px] font-semibold px-4.5 px-5 py-2.5 rounded-xl">Get the guide</a>
+        <button id="menuToggle" aria-label="Menu" class="lg:hidden grid place-items-center w-10 h-10 rounded-xl border border-black/[0.08] dark:border-line bg-white/70 dark:bg-white/[0.04]">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile menu -->
+  <div id="mobileMenu" class="lg:hidden hidden border-t border-black/[0.06] dark:border-line bg-paper/95 dark:bg-ink/95 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-5 py-4 flex flex-col gap-1 text-[15px] font-medium">
+      <a href="#features" class="py-3 px-3 rounded-lg hover:bg-black/[0.04] dark:hover:bg-white/[0.06]">What's inside</a>
+      <a href="#preview" class="py-3 px-3 rounded-lg hover:bg-black/[0.04] dark:hover:bg-white/[0.06]">Preview</a>
+      <a href="#chapters" class="py-3 px-3 rounded-lg hover:bg-black/[0.04] dark:hover:bg-white/[0.06]">Chapters</a>
+      <a href="#pricing" class="py-3 px-3 rounded-lg hover:bg-black/[0.04] dark:hover:bg-white/[0.06]">Pricing</a>
+      <a href="#faq" class="py-3 px-3 rounded-lg hover:bg-black/[0.04] dark:hover:bg-white/[0.06]">FAQ</a>
+      <a href="#pricing" class="btn-primary text-white text-center font-semibold py-3 rounded-xl mt-2">Get the guide — $29</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="relative overflow-hidden pt-[120px] pb-20 sm:pt-[150px] sm:pb-28">
+  <div class="absolute inset-0 grid-bg opacity-[0.55] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_30%,transparent_100%)]"></div>
+  <div class="absolute -top-40 -left-32 w-[520px] h-[520px] rounded-full bg-brand-500/20 dark:bg-brand-500/25 blur-[130px] pointer-events-none"></div>
+  <div class="absolute -top-24 right-0 w-[440px] h-[440px] rounded-full bg-coral/15 dark:bg-coral/20 blur-[130px] pointer-events-none"></div>
+
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-[1.05fr,0.95fr] gap-16 items-center">
+
+      <!-- Copy -->
+      <div>
+        <div class="reveal inline-flex items-center gap-2.5 pl-1.5 pr-4 py-1.5 rounded-full border border-black/[0.08] dark:border-line bg-white/70 dark:bg-white/[0.05] backdrop-blur text-[12.5px] font-medium text-slate-600 dark:text-slate-300">
+          <span class="px-2.5 py-1 rounded-full bg-brand-500 text-white text-[10.5px] font-bold uppercase tracking-[0.13em]">New</span>
+          2nd Edition · 142 pages · 380 images
+        </div>
+
+        <h1 class="reveal font-display text-[42px] leading-[1.03] sm:text-[62px] lg:text-[68px] tracking-[-0.015em] mt-7">
+          Design PDF guides<br class="hidden sm:block"> people <em class="grad-text not-italic italic">actually finish.</em>
+        </h1>
+
+        <p class="reveal mt-6 text-[17px] sm:text-[18.5px] leading-relaxed text-slate-600 dark:text-slate-400 max-w-[560px]">
+          A professional playbook on layout, typography and image treatment — packaged with 380 curated visuals, print-ready export presets and 24 editable templates.
+        </p>
+
+        <div class="reveal mt-9 flex flex-col sm:flex-row gap-3.5">
+          <a href="#pricing" class="btn-primary text-white font-semibold px-7 py-4 rounded-2xl text-[15px] text-center inline-flex items-center justify-center gap-2.5">
+            Get the guide — $29
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#preview" class="btn-ghost inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl text-[15px] font-semibold border border-black/[0.1] dark:border-line bg-white/80 dark:bg-white/[0.05] hover:border-black/20 dark:hover:border-white/25">
+            <svg class="w-[18px] h-[18px] text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            Preview sample pages
+          </a>
+        </div>
+
+        <div class="reveal mt-9 flex flex-wrap items-center gap-x-8 gap-y-5">
+          <div class="flex items-center gap-3">
+            <div class="flex -space-x-3">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80" alt="" class="w-9 h-9 rounded-full object-cover ring-2 ring-paper dark:ring-ink bg-sand">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80" alt="" class="w-9 h-9 rounded-full object-cover ring-2 ring-paper dark:ring-ink bg-sand">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80" alt="" class="w-9 h-9 rounded-full object-cover ring-2 ring-paper dark:ring-ink bg-sand">
+              <span class="w-9 h-9 rounded-full grid place-items-center text-[11px] font-bold bg-brand-500 text-white ring-2 ring-paper dark:ring-ink">2k+</span>
+            </div>
+            <div class="text-[13px] leading-tight">
+              <div class="flex items-center gap-1 text-amber-500">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+              </div>
+              <span class="text-slate-500 dark:text-slate-400">4.9 average · 2,140 designers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book visual -->
+      <div class="relative flex justify-center lg:justify-end">
+        <div id="bookStage" class="book-stage relative w-full max-w-[430px] py-10">
+          <!-- back cover shadow -->
+          <div class="absolute inset-x-10 top-6 bottom-0 rounded-[22px] bg-black/10 dark:bg-black/40 blur-2xl"></div>
+
+          <div id="heroBook" class="book relative mx-auto w-[270px] sm:w-[310px] aspect-[3/4.05] rounded-r-[14px] rounded-l-[5px] overflow-hidden bg-white dark:bg-surface shadow-lift ring-1 ring-black/10 dark:ring-white/10">
+            <!-- spine -->
+            <div class="absolute inset-y-0 left-0 w-[14px] bg-gradient-to-r from-black/[0.28] via-black/[0.10] to-transparent z-20"></div>
+            <div class="absolute inset-y-0 left-[13px] w-px bg-black/10 z-20"></div>
+
+            <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=900&q=80" alt="Cover image" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/45 to-ink/90"></div>
+
+            <div class="relative z-10 h-full flex flex-col justify-between p-7 pl-9 text-white">
+              <div>
+                <div class="text-[10px] font-bold uppercase tracking-[0.28em] text-white/70">Folio Press</div>
+                <div class="w-10 h-px bg-white/40 my-4"></div>
+                <h3 class="font-display text-[30px] leading-[1.06] tracking-[-0.01em]">The Professional PDF Playbook</h3>
+                <p class="mt-3.5 text-[12.5px] leading-relaxed text-white/75 max-w-[200px]">Layout systems, typography and image treatment for documents that get read.</p>
+              </div>
+              <div>
+                <div class="flex gap-1.5 mb-4">
+                  <span class="text-[9.5px] font-semibold uppercase tracking-wider px-2 py-1 rounded bg-white/15 border border-white/20">2nd Ed.</span>
+                  <span class="text-[9.5px] font-semibold uppercase tracking-wider px-2 py-1 rounded bg-white/15 border border-white/20">380 Images</span>
+                </div>
+                <div class="text-[10.5px] uppercase tracking-[0.2em] text-white/60">142 Pages · Print + Digital</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- floating cards -->
+          <div class="floaty absolute -left-2 sm:left-0 top-4 z-30 rounded-2xl bg-white dark:bg-surface shadow-soft ring-1 ring-black/[0.07] dark:ring-line p-3.5 w-[148px]">
+            <div class="flex items-center gap-2.5">
+              <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-500/12 text-brand-500">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              </span>
+              <div class="leading-tight">
+                <div class="text-[17px] font-bold tracking-tight" data-count="380">0</div>
+                <div class="text-[10.5px] text-slate-500 dark:text-slate-400 -mt-0.5">curated images</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="floaty-slow absolute -right-2 sm:right-2 bottom-10 z-30 rounded-2xl bg-white dark:bg-surface shadow-soft ring-1 ring-black/[0.07] dark:ring-line p-3.5 w-[160px]">
+            <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Includes</div>
+            <div class="mt-2 space-y-1.5 text-[12.5px] font-medium">
+              <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>24 templates</div>
+              <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>Print presets</div>
+              <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-coral"></span>Checklists</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- stats bar -->
+    <div class="reveal mt-16 sm:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden bg-black/[0.07] dark:bg-line ring-1 ring-black/[0.06] dark:ring-line">
+      <div class="bg-paper dark:bg-ink px-6 py-7">
+        <div class="font-display text-[36px] leading-none"><span data-count="142">0</span></div>
+        <div class="mt-2 text-[12.5px] uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Pages</div>
+      </div>
+      <div class="bg-paper dark:bg-ink px-6 py-7">
+        <div class="font-display text-[36px] leading-none"><span data-count="12">0</span></div>
+        <div class="mt-2 text-[12.5px] uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Chapters</div>
+      </div>
+      <div class="bg-paper dark:bg-ink px-6 py-7">
+        <div class="font-display text-[36px] leading-none"><span data-count="24">0</span></div>
+        <div class="mt-2 text-[12.5px] uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Templates</div>
+      </div>
+      <div class="bg-paper dark:bg-ink px-6 py-7">
+        <div class="font-display text-[36px] leading-none"><span data-count="380">0</span></div>
+        <div class="mt-2 text-[12.5px] uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Images & figures</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST STRIP ================= -->
+<section class="py-10 border-y border-black/[0.06] dark:border-line bg-white/40 dark:bg-white/[0.015]">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <p class="reveal text-center text-[11.5px] uppercase tracking-[0.22em] text-slate-400 dark:text-slate-500 font-semibold mb-7">Read by design & documentation teams at</p>
+    <div class="reveal flex flex-wrap items-center justify-center gap-x-10 gap-y-5 sm:gap-x-16 opacity-60 dark:opacity-50">
+      <span class="font-display text-[22px] tracking-tight">Northwind</span>
+      <span class="font-semibold text-[16px] tracking-[0.16em] uppercase">Docs Standard</span>
+      <span class="font-display text-[24px] italic">Lumen</span>
+      <span class="font-bold text-[15px] tracking-[0.2em] uppercase">Kestrel</span>
+      <span class="font-display text-[23px] tracking-tight">Studio M</span>
+      <span class="font-semibold text-[15px] tracking-[0.18em] uppercase">Ardent</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section id="features" class="py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl">
+      <span class="reveal inline-block text-[12px] font-bold uppercase tracking-[0.2em] text-brand-500">What's inside</span>
+      <h2 class="reveal font-display text-[36px] sm:text-[48px] leading-[1.08] tracking-[-0.015em] mt-4">Everything you need to ship a beautiful document.</h2>
+      <p class="reveal mt-5 text-[16.5px] leading-relaxed text-slate-600 dark:text-slate-400">Not a theory book. Every chapter pairs a principle with a real spread, a measurable rule and a template you can drop into your own project today.</p>
+    </div>
+
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- 1 -->
+      <div class="reveal card-hover rounded-2xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line p-7 shadow-soft hover:shadow-lift">
+        <span class="grid place-items-center w-11 h-11 rounded-xl bg-brand-500/10 text-brand-500">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </span>
+        <h3 class="mt-5 text-[17px] font-semibold tracking-tight">Editorial-grade layout</h3>
+        <p class="mt-2.5 text-[14.5px] leading-relaxed text-slate-600 dark:text-slate-400">Grid systems, baseline rhythm and margin architecture explained with 40 annotated spread diagrams.</p>
+      </div>
+      <!-- 2 -->
+      <div class="reveal card-hover rounded-2xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line p-7 shadow-soft hover:shadow-lift">
+        <span class="grid place-items-center w-11 h-11 rounded-xl bg-coral/12 text-coral">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        </span>
+        <h3 class="mt-5 text-[17px] font-semibold tracking-tight">380 curated visuals</h3>
+        <p class="mt-2.5 text-[14.5px] leading-relaxed text-slate-600 dark:text-slate-400">Charts, diagrams, photo grids and icon sets — all licensed for commercial use and organised by chapter.</p>
+      </div>
+      <!-- 3 -->
+      <div class="reveal card-hover rounded-2xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line p-7 shadow-soft hover:shadow-lift">
+        <span class="grid place-items-center w-11 h-11 rounded-xl bg-emerald-500/12 text-emerald-600 dark:text-emerald-400">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        </span>
+        <h3 class="mt-5 text-[17px] font-semibold tracking-tight">Print-ready presets</h3>
+        <p class="mt-2.5 text-[14.5px] leading-relaxed text-slate-600 dark:text-slate-400">Export profiles for offset, digital print and screen — with bleeds, ICC profiles and font embedding done right.</p>
+      </div>
+      <!-- 4 -->
+      <div class="reveal card-hover rounded-2xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line p-7 shadow-soft hover:shadow-lift">
+        <span class="grid place-items-center w-11 h-11 rounded-xl bg-brand-500/10 text-brand-500">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+        </span>
+        <h3 class="mt-5 text-[17px] font-semibold tracking-tight">Typography that scales</h3>
+        <p class="mt-2.5 text-[14.5px] leading-relaxed text-slate-600 dark:text-slate-400">Type scales, pairing recipes and optical fixes that stay legible from phone screen to A3 poster.</p>
+      </div>
+      <!-- 5 -->
+      <div class="reveal card-hover rounded-2xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line p-7 shadow-soft hover:shadow-lift">
+        <span class="grid place-items-center w-11 h-11 rounded-xl bg-coral/12 text-coral">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <h3 class="mt-5 text-[17px] font-semibold tracking-tight">Accessibility built in</h3>
+        <p class="mt-2.5 text-[14.5px] leading-relaxed text-slate-600 dark:text-slate-400">Tagged reading order, alt text workflows and colour contrast targets that satisfy WCAG 2.2 AA.</p>
+      </div>
+      <!-- 6 -->
+      <div class="reveal card-hover rounded-2xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line p-7 shadow-soft hover:shadow-lift">
+        <span class="grid place-items-center w-11 h-11 rounded-xl bg-emerald-500/12 text-emerald-600 dark:text-emerald-400">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </span>
+        <h3 class="mt-5 text-[17px] font-semibold tracking-tight">Pre-flight checklists</h3>
+        <p class="mt-2.5 text-[14.5px] leading-relaxed text-slate-600 dark:text-slate-400">The 32-point verification list our studio runs before every client release. Steal it freely.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INTERACTIVE PREVIEW ================= -->
+<section id="preview" class="py-20 sm:py-28 border-y border-black/[0.06] dark:border-line bg-white/50 dark:bg-white/[0.015]">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+      <div class="max-w-2xl">
+        <span class="reveal inline-block text-[12px] font-bold uppercase tracking-[0.2em] text-brand-500">Sample spreads</span>
+        <h2 class="reveal font-display text-[36px] sm:text-[48px] leading-[1.08] tracking-[-0.015em] mt-4">Flip through four real pages.</h2>
+        <p class="reveal mt-5 text-[16.5px] leading-relaxed text-slate-600 dark:text-slate-400">Select a chapter to preview the actual layout — image treatment, caption conventions and text hierarchy included.</p>
+      </div>
+      <div class="reveal hidden lg:flex items-center gap-2.5 text-[13px] text-slate-500 dark:text-slate-400">
+        <span class="grid place-items-center w-8 h-8 rounded-full border border-black/10 dark:border-line">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+        Tap a chapter to switch
+      </div>
+    </div>
+
+    <div class="mt-12 grid lg:grid-cols-[250px,1fr] gap-7">
+
+      <!-- Chapter tabs -->
+      <div id="chapterList" class="reveal flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 -mx-5 px-5 lg:mx-0 lg:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"></div>
+
+      <!-- Spread -->
+      <div class="reveal">
+        <div class="rounded-2xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line shadow-lift overflow-hidden">
+          <!-- frame chrome -->
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-black/[0.06] dark:border-line bg-black/[0.015] dark:bg-white/[0.02]">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]"></span>
+            <span class="ml-3 text-[11.5px] font-medium text-slate-400 dark:text-slate-500 truncate" id="frameTitle">playbook-2nd-edition.pdf — page 12 / 142</span>
+            <span class="ml-auto hidden sm:inline-flex text-[10.5px] font-semibold uppercase tracking-wider px-2 py-1 rounded bg-brand-500/10 text-brand-500">Live preview</span>
+          </div>
+          <div id="spread" class="min-h-[420px]"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTERS ================= -->
+<section id="chapters" class="py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-[0.9fr,1.1fr] gap-14">
+
+      <div class="lg:sticky lg:top-24 self-start">
+        <span class="reveal inline-block text-[12px] font-bold uppercase tracking-[0.2em] text-brand-500">Table of contents</span>
+        <h2 class="reveal font-display text-[36px] sm:text-[46px] leading-[1.08] tracking-[-0.015em] mt-4">Twelve chapters, zero filler.</h2>
+        <p class="reveal mt-5 text-[16.5px] leading-relaxed text-slate-600 dark:text-slate-400">Each chapter closes with a one-page worksheet and a set of downloadable assets so you can apply it immediately.</p>
+
+        <div class="reveal mt-8 flex flex-wrap gap-3">
+          <div class="flex items-center gap-2.5 rounded-xl border border-black/[0.08] dark:border-line bg-white/70 dark:bg-white/[0.04] px-4 py-3">
+            <svg class="w-4 h-4 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5V6a2 2 0 0 1 2-2h13v16H6a2 2 0 0 1-2-2z"/></svg>
+            <span class="text-[13.5px] font-medium">142 pages</span>
+          </div>
+          <div class="flex items-center gap-2.5 rounded-xl border border-black/[0.08] dark:border-line bg-white/70 dark:bg-white/[0.04] px-4 py-3">
+            <svg class="w-4 h-4 text-coral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            <span class="text-[13.5px] font-medium">Instant download</span>
+          </div>
+          <div class="flex items-center gap-2.5 rounded-xl border border-black/[0.08] dark:border-line bg-white/70 dark:bg-white/[0.04] px-4 py-3">
+            <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span class="text-[13.5px] font-medium">Lifetime updates</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-x-8 gap-y-1">
+        <!-- items injected by JS -->
+        <div id="toc" class="contents"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="py-20 sm:py-28 border-y border-black/[0.06] dark:border-line bg-white/50 dark:bg-white/[0.015]">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl mx-auto text-center">
+      <span class="reveal inline-block text-[12px] font-bold uppercase tracking-[0.2em] text-brand-500">Reader stories</span>
+      <h2 class="reveal font-display text-[36px] sm:text-[48px] leading-[1.08] tracking-[-0.015em] mt-4">Trusted by people who ship documents.</h2>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-3 gap-5">
+      <figure class="reveal card-hover rounded-2xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line p-7 shadow-soft hover:shadow-lift flex flex-col">
+        <div class="flex gap-1 text-amber-500">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+        </div>
+        <blockquote class="mt-5 text-[15.5px] leading-relaxed flex-1">"We rebuilt our entire 80-page product handbook with chapter four alone. Support tickets about the PDF dropped by a third."</blockquote>
+        <figcaption class="mt-6 pt-5 border-t border-black/[0.07] dark:border-line flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80" alt="" class="w-10 h-10 rounded-full object-cover bg-sand">
+          <div class="leading-tight">
+            <div class="text-[14px] font-semibold">Amara Fields</div>
+            <div class="text-[12.5px] text-slate-500 dark:text-slate-400">Head of Docs, Northwind</div>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="reveal card-hover rounded-2xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line p-7 shadow-soft hover:shadow-lift flex flex-col">
+        <div class="flex gap-1 text-amber-500">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+        </div>
+        <blockquote class="mt-5 text-[15.5px] leading-relaxed flex-1">"The image treatment rules are worth the price on their own. Our reports finally look like they were made by a studio."</blockquote>
+        <figcaption class="mt-6 pt-5 border-t border-black/[0.07] dark:border-line flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80" alt="" class="w-10 h-10 rounded-full object-cover bg-sand">
+          <div class="leading-tight">
+            <div class="text-[14px] font-semibold">Daniel Okoye</div>
+            <div class="text-[12.5px] text-slate-500 dark:text-slate-400">Design Lead, Lumen</div>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="reveal card-hover rounded-2xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line p-7 shadow-soft hover:shadow-lift flex flex-col">
+        <div class="flex gap-1 text-amber-500">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+        </div>
+        <blockquote class="mt-5 text-[15.5px] leading-relaxed flex-1">"I've bought a lot of design books. This is the first one I actually finished — and the first one my team asked to borrow."</blockquote>
+        <figcaption class="mt-6 pt-5 border-t border-black/[0.07] dark:border-line flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80" alt="" class="w-10 h-10 rounded-full object-cover bg-sand">
+          <div class="leading-tight">
+            <div class="text-[14px] font-semibold">Sofia Marchetti</div>
+            <div class="text-[12.5px] text-slate-500 dark:text-slate-400">Founder, Studio M</div>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing" class="py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl mx-auto text-center">
+      <span class="reveal inline-block text-[12px] font-bold uppercase tracking-[0.2em] text-brand-500">Pricing</span>
+      <h2 class="reveal font-display text-[36px] sm:text-[48px] leading-[1.08] tracking-[-0.015em] mt-4">One purchase. Permanent access.</h2>
+      <p class="reveal mt-5 text-[16.5px] leading-relaxed text-slate-600 dark:text-slate-400">Every tier includes the full 142-page guide as high-resolution PDF, EPUB and tagged accessible PDF.</p>
+    </div>
+
+    <div class="mt-14 grid lg:grid-cols-3 gap-6 items-start">
+
+      <!-- Starter -->
+      <div class="reveal card-hover rounded-3xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line p-8 shadow-soft hover:shadow-lift">
+        <h3 class="text-[17px] font-semibold tracking-tight">The Guide</h3>
+        <p class="mt-2 text-[14px] text-slate-500 dark:text-slate-400">For solo designers and writers.</p>
+        <div class="mt-7 flex items-end gap-1.5">
+          <span class="font-display text-[46px] leading-none">$29</span>
+          <span class="text-[14px] text-slate-500 dark:text-slate-400 mb-1.5">one-time</span>
+        </div>
+        <a href="#" data-cta class="mt-7 block text-center font-semibold text-[14.5px] py-3.5 rounded-xl border border-black/[0.12] dark:border-line hover:bg-black/[0.03] dark:hover:bg-white/[0.06] transition">Buy the guide</a>
+        <ul class="mt-8 space-y-3.5 text-[14.5px]">
+          <li class="flex gap-3"><svg class="w-4 h-4 mt-1 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>142-page guide (PDF, EPUB)</span></li>
+          <li class="flex gap-3"><svg class="w-4 h-4 mt-1 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>380 licensed images & figures</span></li>
+          <li class="flex gap-3"><svg class="w-4 h-4 mt-1 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Print & screen export presets</span></li>
+          <li class="flex gap-3 text-slate-400 dark:text-slate-500"><svg class="w-4 h-4 mt-1 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Templates not included</span></li>
+        </ul>
+      </div>
+
+      <!-- Pro -->
+      <div class="reveal relative rounded-3xl p-[1.5px] bg-gradient-to-b from-brand-500 via-brand-400 to-coral shadow-glow lg:-mt-5">
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
+          <span class="text-[10.5px] font-bold uppercase tracking-[0.16em] text-white bg-brand-500 px-3.5 py-1.5 rounded-full whitespace-nowrap shadow-lg">Most popular</span>
+        </div>
+        <div class="rounded-[22px] bg-white dark:bg-surface p-8">
+          <h3 class="text-[17px] font-semibold tracking-tight">Guide + Templates</h3>
+          <p class="mt-2 text-[14px] text-slate-500 dark:text-slate-400">For teams shipping client work.</p>
+          <div class="mt-7 flex items-end gap-2">
+            <span class="font-display text-[46px] leading-none">$49</span>
+            <span class="text-[14px] text-slate-500 dark:text-slate-400 mb-1.5 line-through decoration-slate-400/60">$79</span>
+          </div>
+          <a href="#" data-cta class="mt-7 block text-center btn-primary text-white font-semibold text-[14.5px] py-3.5 rounded-xl">Get everything</a>
+          <ul class="mt-8 space-y-3.5 text-[14.5px]">
+            <li class="flex gap-3"><svg class="w-4 h-4 mt-1 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Everything in The Guide</span></li>
+            <li class="flex gap-3"><svg class="w-4 h-4 mt-1 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>24 editable layout templates</span></li>
+            <li class="flex gap-3"><svg class="w-4 h-4 mt-1 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Pre-flight checklist (Notion + PDF)</span></li>
+            <li class="flex gap-3"><svg class="w-4 h-4 mt-1 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Lifetime updates & new editions</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Team -->
+      <div class="reveal card-hover rounded-3xl bg-white dark:bg-surface border border-black/[0.07] dark:border-line p-8 shadow-soft hover:shadow-lift">
+        <h3 class="text-[17px] font-semibold tracking-tight">Studio Licence</h3>
+        <p class="mt-2 text-[14px] text-slate-500 dark:text-slate-400">For teams of five or more.</p>
+        <div class="mt-7 flex items-end gap-1.5">
+          <span class="font-display text-[46px] leading-none">$149</span>
+          <span class="text-[14px] text-slate-500 dark:text-slate-400 mb-1.5">/ team</span>
+        </div>
+        <a href="#" data-cta class="mt-7 block text-center font-semibold text-[14.5px] py-3.5 rounded-xl border border-black/[0.12] dark:border-line hover:bg-black/[0.03] dark:hover:bg-white/[0.06] transition">Contact the studio</a>
+        <ul class="mt-8 space-y-3.5 text-[14.5px]">
+          <li class="flex gap-3"><svg class="w-4 h-4 mt-1 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Everything in Guide + Templates</span></li>
+          <li class="flex gap-3"><svg class="w-4 h-4 mt-1 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Unlimited seats within your org</span></li>
+          <li class="flex gap-3"><svg class="w-4 h-4 mt-1 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Extended commercial licence</span></li>
+          <li class="flex gap-3"><svg class="w-4 h-4 mt-1 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>90-minute onboarding workshop</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="reveal mt-9 text-center text-[13.5px] text-slate-500 dark:text-slate-400">
+      Secure checkout · 30-day money-back guarantee · Instant download
+    </p>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" class="py-20 sm:py-28 border-t border-black/[0.06] dark:border-line bg-white/50 dark:bg-white/[0.015]">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-[0.8fr,1.2fr] gap-14">
+    <div class="lg:sticky lg:top-24 self-start">
+      <span class="reveal inline-block text-[12px] font-bold uppercase tracking-[0.2em] text-brand-500">Questions</span>
+      <h2 class="reveal font-display text-[36px] sm:text-[46px] leading-[1.08] tracking-[-0.015em] mt-4">Good to know.</h2>
+      <p class="reveal mt-5 text-[15.5px] leading-relaxed text-slate-600 dark:text-slate-400">Still unsure? Write to us at <a href="#" class="text-brand-500 font-medium underline decoration-brand-500/30 hover:decoration-brand-500 transition">hello@foliopress.studio</a> and we'll reply within a day.</p>
+    </div>
+
+    <div id="faqList" class="divide-y divide-black/[0.07] dark:divide-line border-y border-black/[0.07] dark:border-line"></div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="reveal relative overflow-hidden rounded-[28px] bg-ink dark:bg-surface px-6 py-14 sm:px-14 sm:py-20 text-white ring-1 ring-black/10 dark:ring-line">
+      <div class="absolute -top-24 -left-16 w-[420px] h-[420px] rounded-full bg-brand-500/35 blur-[120px]"></div>
+      <div class="absolute -bottom-32 right-0 w-[380px] h-[380px] rounded-full bg-coral/25 blur-[120px]"></div>
+      <div class="absolute inset-0 grid-bg opacity-[0.12]"></div>
+
+      <div class="relative max-w-2xl">
+        <span class="inline-block text-[11.5px] font-bold uppercase tracking-[0.22em] text-white/60">Get started today</span>
+        <h2 class="font-display text-[38px] sm:text-[54px] leading-[1.05] tracking-[-0.015em] mt-4">Make your next PDF the one people finish.</h2>
+        <p class="mt-5 text-[16.5px] leading-relaxed text-white/70">Join 2,140 designers, writers and documentation teams who build better documents with the Playbook.</p>
+
+        <form id="ctaForm" class="mt-9 flex flex-col sm:flex-row gap-3 max-w-lg">
+          <input type="email" required placeholder="you@company.com" class="flex-1 rounded-xl bg-white/10 border border-white/20 placeholder-white/45 px-5 py-4 text-[15px] outline-none focus:border-white/60 focus:bg-white/[0.14] transition">
+          <button type="submit" class="btn-primary text-white font-semibold px-7 py-4 rounded-xl text-[15px] whitespace-nowrap">Get the guide — $29</button>
+        </form>
+        <p class="mt-4 text-[12.5px] text-white/50">No spam. Unsubscribe anytime. 30-day money-back guarantee.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="border-t border-black/[0.07] dark:border-line py-14">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div>
+        <a href="#" class="flex items-center gap-2.5">
+          <span class="grid place-items-center w-9 h-9 rounded-[10px] bg-gradient-to-br from-brand-500 to-brand-700">
+            <svg viewBox="0 0 24 24" class="w-[18px] h-[18px] text-white" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>
+          </span>
+          <span class="font-semibold tracking-tight text-[15px]">Folio Press</span>
+        </a>
+        <p class="mt-4 text-[14px] leading-relaxed text-slate-500 dark:text-slate-400 max-w-[260px]">A small design studio writing about documents, typography and the craft of being read.</p>
+      </div>
+
+      <div>
+        <h4 class="text-[12px] font-bold uppercase tracking-[0.16em] text-slate-400">Product</h4>
+        <ul class="mt-4 space-y-2.5 text-[14.5px] text-slate-600 dark:text-slate-400">
+          <li><a href="#features" class="hover:text-brand-500 transition">What's inside</a></li>
+          <li><a href="#preview" class="hover:text-brand-500 transition">Sample pages</a></li>
+          <li><a href="#pricing" class="hover:text-brand-500 transition">Pricing</a></li>
+          <li><a href="#faq" class="hover:text-brand-500 transition">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-[12px] font-bold uppercase tracking-[0.16em] text-slate-400">Resources</h4>
+        <ul class="mt-4 space-y-2.5 text-[14.5px] text-slate-600 dark:text-slate-400">
+          <li><a href="#" class="hover:text-brand-500 transition">Free checklist</a></li>
+          <li><a href="#" class="hover:text-brand-500 transition">Type scale calculator</a></li>
+          <li><a href="#" class="hover:text-brand-500 transition">Journal</a></li>
+          <li><a href="#" class="hover:text-brand-500 transition">Licence terms</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-[12px] font-bold uppercase tracking-[0.16em] text-slate-400">Studio</h4>
+        <ul class="mt-4 space-y-2.5 text-[14.5px] text-slate-600 dark:text-slate-400">
+          <li><a href="#" class="hover:text-brand-500 transition">About</a></li>
+          <li><a href="#" class="hover:text-brand-500 transition">Contact</a></li>
+          <li><a href="#" class="hover:text-brand-500 transition">Privacy</a></li>
+          <li><a href="#" class="hover:text-brand-500 transition">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-7 border-t border-black/[0.07] dark:border-line flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-[13px] text-slate-500 dark:text-slate-400">© <span id="year">2025</span> Folio Press. All rights reserved.</p>
+      <div class="flex items-center gap-3">
+        <a href="#" aria-label="X" class="grid place-items-center w-9 h-9 rounded-lg border border-black/[0.08] dark:border-line hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7 8 7.6 12h-6.3l-4.9-7.3L5.6 22H2.5l7.4-8.5L2.4 2h6.4l4.6 6.8L18.9 2z"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn" class="grid place-items-center w-9 h-9 rounded-lg border border-black/[0.08] dark:border-line hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95C21.1 8.75 22 11 22 14.1V21h-4v-6.1c0-1.45-.53-2.45-1.83-2.45-1 0-1.6.67-1.86 1.32-.1.23-.12.55-.12.87V21h-4z"/></svg>
+        </a>
+        <a href="#" aria-label="Dribbble" class="grid place-items-center w-9 h-9 rounded-lg border border-black/[0.08] dark:border-line hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.2"/><path d="M5 8.5c4.6 1 9.8.4 13.4-2.2M3.2 14.4c4.2-2.6 9.6-2.3 13 1.6M8.5 3.2c3.6 3.7 6.2 8.9 7.2 15.4"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-6 right-6 z-[70] translate-y-24 opacity-0 transition-all duration-500 pointer-events-none">
+  <div class="flex items-start gap-3 rounded-2xl bg-ink dark:bg-surface text-white px-5 py-4 shadow-lift ring-1 ring-white/10 max-w-[330px]">
+    <span class="grid place-items-center w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 shrink-0">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </span>
+    <div>
+      <div class="text-[14px] font-semibold" id="toastTitle">Check your inbox</div>
+      <div class="text-[13px] text-white/60 mt-0.5" id="toastMsg">We sent the free sample spread to your email.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DATA
+   ============================================================ */
+const chapters = [
+  {
+    n: '01',
+    tab: 'Foundations',
+    kicker: 'Chapter One — Foundations',
+    heading: 'Why most PDFs lose the reader by page two',
+    body: 'Attention is a budget. This chapter maps the eight-second cover test, the reading rhythm of a spread, and why generous white space outperforms dense information every single time.',
+    points: ['The eight-second cover test', 'Choosing a type scale that survives print', 'White space as a deliberate decision'],
+    img: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Figure 1.3 — Cover hierarchy study, measured across 60 documents',
+    page: 12
+  },
+  {
+    n: '02',
+    tab: 'Layout systems',
+    kicker: 'Chapter Two — Layout Systems',
+    heading: 'Building a grid that survives real content',
+    body: 'A grid is a promise about where things will land. Learn the 12-column baseline used throughout this book, how to break it deliberately, and how to keep spreads balanced when text runs long.',
+    points: ['Column maths without the headache', 'Baseline grids and vertical rhythm', 'Deliberate asymmetry in editorial spreads'],
+    img: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Figure 2.7 — Margin architecture, 12-column system at 1:1.618',
+    page: 38
+  },
+  {
+    n: '03',
+    tab: 'Image treatment',
+    kicker: 'Chapter Three — Image Treatment',
+    heading: 'Placing images so they carry meaning',
+    body: 'Every image earns its space. This chapter covers crop logic, caption conventions, colour grading for print, and the rule that decides whether an image should be full-bleed or framed.',
+    points: ['The full-bleed decision rule', 'Caption typography and placement', 'Colour grading for CMYK output'],
+    img: 'https://images.unsplash.com/photo-1481487196290-c152efe083f5?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Figure 3.2 — Full-bleed versus framed: reader recall comparison',
+    page: 74
+  },
+  {
+    n: '04',
+    tab: 'Export & delivery',
+    kicker: 'Chapter Four — Export & Delivery',
+    heading: 'Exports that never come back from the printer',
+    body: 'Bleeds, ICC profiles, font embedding, tagged structure and file-size budgeting. The final chapter is a complete pre-flight workflow you can run in under ten minutes.',
+    points: ['Offset vs digital vs screen presets', 'Tagged PDFs and reading order', 'Reducing file size without visible loss'],
+    img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Figure 4.9 — Pre-flight output report, 32-point verification',
+    page: 118
+  }
+];
+
+const tocItems = [
+  ['01', 'Foundations', 'Cover hierarchy, pacing, reader attention'],
+  ['02', 'Layout Systems', 'Grids, margins and vertical rhythm'],
+  ['03', 'Type in Practice', 'Scales, pairings and optical fixes'],
+  ['04', 'Image Treatment', 'Crops, captions and colour grading'],
+  ['05', 'Colour & Contrast', 'Accessible palettes for print and screen'],
+  ['06', 'Diagrams & Data', 'Charts that read at a glance'],
+  ['07', 'Structure & Navigation', 'Bookmarks, TOC and internal links'],
+  ['08', 'Accessibility', 'Tagged PDFs and WCAG 2.2 AA'],
+  ['09', 'Templates', '24 production-ready starting points'],
+  ['10', 'Print Production', 'Bleeds, profiles and paper choice'],
+  ['11', 'Digital Delivery', 'File size, hosting and versioning'],
+  ['12', 'Pre-flight', 'The 32-point release checklist']
+];
+
+const faqs = [
+  ['What exactly do I get when I buy?', 'You receive three files immediately: a 142-page print-resolution PDF, a reflowable EPUB for e-readers, and a tagged accessible PDF. Pro and Studio tiers add 24 editable layout templates, the Notion pre-flight checklist and lifetime updates.'],
+  ['Which software do the templates require?', 'The templates ship as native files for Adobe InDesign, Affinity Publisher and Figma, plus a generic PDF/IDML version. You only need one of them to get started — no plugins or fonts beyond the included open-licence set.'],
+  ['Can I use the images commercially?', 'Yes. All 380 images, diagrams and icons are licensed for commercial use in your own documents, client work and marketing. You may not resell them as a standalone stock library.'],
+  ['Is this suitable for beginners?', 'It is written for people who already make documents but want them to look professional. If you have never opened a layout tool, chapters one and two will still get you to a credible first draft.'],
+  ['Do I get future editions?', 'Every purchase includes lifetime updates. The second edition added 46 new pages and 90 new figures at no cost to existing readers.'],
+  ['What is the refund policy?', 'If the guide is not useful to you, email us within 30 days of purchase and we refund in full — no questions, no forms.']
+];
+
+/* ============================================================
+   RENDER — INTERACTIVE SPREAD
+   ============================================================ */
+const chapterListEl = document.getElementById('chapterList');
+const spreadEl = document.getElementById('spread');
+const frameTitleEl = document.getElementById('frameTitle');
+let activeChapter = 0;
+
+chapters.forEach((c, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'chapter-tab shrink-0 lg:w-full text-left px-4 py-3.5 rounded-xl border transition-all duration-300';
+  btn.dataset.index = i;
+  btn.innerHTML = `
+    <span class="flex items-center gap-3">
+      <span class="tab-num text-[11px] font-bold tracking-[0.1em] opacity-60">${c.n}</span>
+      <span class="tab-label text-[14px] font-semibold whitespace-nowrap lg:whitespace-normal">${c.tab}</span>
+    </span>`;
+  btn.addEventListener('click', () => setChapter(i));
+  chapterListEl.appendChild(btn);
+});
+
+function paintTabs() {
+  document.querySelectorAll('.chapter-tab').forEach((el, i) => {
+    const on = i === activeChapter;
+    el.className = 'chapter-tab shrink-0 lg:w-full text-left px-4 py-3.5 rounded-xl border transition-all duration-300 ' +
+      (on
+        ? 'bg-white dark:bg-surface border-brand-500/40 shadow-soft text-ink dark:text-white'
+        : 'border-black/[0.08] dark:border-line text-slate-500 dark:text-slate-400 hover:border-black/20 dark:hover:border-white/25 hover:text-ink dark:hover:text-white bg-white/40 dark:bg-white/[0.02]');
+  });
+}
+
+function setChapter(i) {
+  activeChapter = i;
+  paintTabs();
+  const c = chapters[i];
+  frameTitleEl.textContent = `playbook-2nd-edition.pdf — page ${c.page} / 142`;
+
+  spreadEl.innerHTML = `
+    <div class="spread-in grid md:grid-cols-2">
+      <div class="p-7 sm:p-9 border-b md:border-b-0 md:border-r border-black/[0.06] dark:border-line flex flex-col">
+        <div class="flex items-center gap-3">
+          <span class="font-display text-[34px] leading-none text-brand-500/25">${c.n}</span>
+          <span class="text-[10.5px] font-bold uppercase tracking-[0.18em] text-brand-500">${c.kicker}</span>
+        </div>
+        <h3 class="font-display text-[26px] sm:text-[31px] leading-[1.1] tracking-[-0.01em] mt-5">${c.heading}</h3>
+        <p class="mt-4 text-[14.5px] leading-relaxed text-slate-600 dark:text-slate-400">${c.body}</p>
+        <ul class="mt-6 space-y-2.5">
+          ${c.points.map(p => `
+            <li class="flex gap-3 text-[14px] text-slate-700 dark:text-slate-300">
+              <svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <span>${p}</span>
+            </li>`).join('')}
+        </ul>
+        <div class="mt-auto pt-7 flex items-center justify-between text-[10.5px] uppercase tracking-[0.16em] text-slate-400">
+          <span>Folio Press</span>
+          <span>Page ${c.page}</span>
+        </div>
+      </div>
+
+      <div class="p-5 sm:p-7 bg-black/[0.02] dark:bg-white/[0.02] flex flex-col">
+        <div class="rounded-xl overflow-hidden ring-1 ring-black/[0.07] dark:ring-line bg-sand dark:bg-line">
+          <img src="${c.img}" alt="${c.tab} spread" class="w-full h-[210px] sm:h-[268px] object-cover">
+        </div>
+        <p class="mt-3.5 text-[12.5px] italic leading-relaxed text-slate-500 dark:text-slate-400">${c.caption}</p>
+        <div class="mt-auto pt-6">
+          <div class="flex items-center gap-2 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            Full-bleed · 300 DPI · CMYK
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+paintTabs();
+setChapter(0);
+
+/* ============================================================
+   RENDER — TABLE OF CONTENTS
+   ============================================================ */
+const tocEl = document.getElementById('toc');
+tocItems.forEach(([n, title, sub], i) => {
+  const row = document.createElement('div');
+  row.className = 'toc-row group flex items-start gap-5 py-5 border-b border-black/[0.07] dark:border-line cursor-default';
+  row.style.transitionDelay = (i * 30) + 'ms';
+  row.innerHTML = `
+    <span class="font-display text-[22px] leading-none text-slate-300 dark:text-slate-600 group-hover:text-brand-500 transition-colors duration-300 pt-1">${n}</span>
+    <span class="min-w-0">
+      <span class="block text-[15.5px] font-semibold tracking-tight group-hover:text-brand-500 transition-colors duration-300">${title}</span>
+      <span class="block text-[13.5px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">${sub}</span>
+    </span>
+    <svg class="w-4 h-4 ml-auto mt-2 shrink-0 text-slate-300 dark:text-slate-600 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+  tocEl.appendChild(row);
+});
+
+/* ============================================================
+   RENDER — FAQ ACCORDION
+   ============================================================ */
+const faqListEl = document.getElementById('faqList');
+faqs.forEach(([q, a], i) => {
+  const item = document.createElement('div');
+  item.className = 'faq-item reveal';
+  item.innerHTML = `
+    <button class="faq-trigger w-full flex items-start justify-between gap-6 text-left py-6">
+      <span class="text-[16px] sm:text-[17px] font-semibold tracking-tight pr-2">${q}</span>
+      <span class="faq-icon shrink-0 grid place-items-center w-8 h-8 rounded-full border border-black/[0.1] dark:border-line mt-0.5">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      </span>
+    </button>
+    <div class="faq-body">
+      <p class="pb-7 pr-12 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">${a}</p>
+    </div>`;
+  faqListEl.appendChild(item);
+
+  const trigger = item.querySelector('.faq-trigger');
+  const body = item.querySelector('.faq-body');
+  trigger.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o => {
+      o.classList.remove('open');
+      o.querySelector('.faq-body').style.maxHeight = '0px';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      const delay = Math.min(i * 70, 280);
+      setTimeout(() => entry.target.classList.add('in'), delay);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ============================================================
+   COUNTERS
+   ============================================================ */
+function animateCount(el) {
+  const target = parseFloat(el.dataset.count);
+  const duration = 1500;
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased).toLocaleString();
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = target.toLocaleString() + (el.dataset.suffix || '');
+  }
+  requestAnimationFrame(step);
+}
+
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { animateCount(e.target); countObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+/* ============================================================
+   NAV BEHAVIOUR + PROGRESS
+   ============================================================ */
+const nav = document.getElementById('nav');
+const progressBar = document.getElementById('progressBar');
+
+function onScroll() {
+  const y = window.scrollY;
+  if (y > 12) {
+    nav.classList.add('nav-scrolled', 'bg-paper/80', 'dark:bg-ink/80', 'border-black/[0.07]', 'dark:border-line');
+  } else {
+    nav.classList.remove('nav-scrolled', 'bg-paper/80', 'dark:bg-ink/80', 'border-black/[0.07]', 'dark:border-line');
+  }
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+/* ============================================================
+   THEME TOGGLE
+   ============================================================ */
+const root = document.documentElement;
+let storedTheme = null;
+try { storedTheme = localStorage.getItem('folio-theme'); } catch (e) {}
+if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  root.classList.add('dark');
+}
+document.getElementById('themeToggle').addEventListener('click', () => {
+  root.classList.toggle('dark');
+  try { localStorage.setItem('folio-theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+});
+
+/* ============================================================
+   HERO BOOK TILT
+   ============================================================ */
+const stage = document.getElementById('bookStage');
+const book = document.getElementById('heroBook');
+if (stage && book) {
+  stage.addEventListener('mousemove', (e) => {
+    const r = stage.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    book.style.transform = `rotateY(${-16 + x * 18}deg) rotateX(${6 - y * 12}deg) translateZ(0)`;
+  });
+  stage.addEventListener('mouseleave', () => {
+    book.style.transform = 'rotateY(-16deg) rotateX(6deg)';
+  });
+}
+
+/* ============================================================
+   TOAST + CTA FORM
+   ============================================================ */
+const toast = document.getElementById('toast');
+let toastTimer;
+function showToast(title, msg) {
+  document.getElementById('toastTitle').textContent = title;
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.remove('translate-y-24', 'opacity-0');
+  toast.classList.add('translate-y-0', 'opacity-100');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.add('translate-y-24', 'opacity-0');
+    toast.classList.remove('translate-y-0', 'opacity-100');
+  }, 4200);
+}
+
+document.getElementById('ctaForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  showToast('Check your inbox', 'Your download link for the Playbook is on its way.');
+  e.target.reset();
+});
+
+document.querySelectorAll('[data-cta]').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    showToast('Added to checkout', 'Redirecting you to secure checkout…');
+  });
+});
+
+/* ============================================================
+   MISC
+   ============================================================ */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
